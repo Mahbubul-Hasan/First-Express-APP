@@ -4,8 +4,10 @@ import fileUpload from "../../utils/file.upload.js";
 
 const router = express.Router();
 
-router.post("/sign-up", AuthController.signup);
-router.post("/sign-in", AuthController.signin);
-router.post("/update-profile-picture", fileUpload.single("image"), AuthController.updateProfilePicture);
+const authController = new AuthController();
+
+router.post("/sign-up", authController.signup);
+router.post("/sign-in", authController.signin);
+router.post("/update-profile-picture", fileUpload.single("image"), authController.updateProfilePicture);
 
 export default router;
