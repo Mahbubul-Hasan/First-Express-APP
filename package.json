@@ -5,7 +5,8 @@
     "type": "module",
     "scripts": {
         "start": "node dist/app.ts",
-        "dev": "nodemon --exec tsx -r tsconfig-paths/register src/app.ts"
+        "dev": "nodemon --exec tsx -r tsconfig-paths/register src/app.ts",
+        "seed": "tsx src/seeders/seeder.ts seed"
     },
     "keywords": [],
     "author": "Mahbubul Hasan",
