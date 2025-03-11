@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import { Request } from "express";
 import { HTTP_STATUS_CODES } from "../constants/responseCodes.js";
 import { responseFormat } from "../utils/response.formatter.js";
-import { IUser, IUserInput, User } from "../models/user.model.js";
+import { IUser, User } from "../models/user.model.js";
 import { CustomRequest } from "../types/custom.request.js";
 import path from "path";
 import fs from "fs";
@@ -11,7 +11,7 @@ import jwt from "jsonwebtoken";
 class AuthService {
     async signup(req: Request) {
         const { name, email, phone, password } = req.body;
-        const newUser: IUserInput = {
+        const newUser: IUser = {
             name: name,
             email: email,
             phone: phone ?? null,
@@ -43,8 +43,8 @@ class AuthService {
 
     async updateProfilePicture(req: CustomRequest) {
         const file = req.file;
-        const userId = "67cbd95b6307d14105ce7349";
-        const user: IUserInput = await User.findById(userId);
+        const userId = "67cf7bf8a0683fcd38c6426c";
+        const user: IUser = await User.findById(userId);
 
         if (!user) throw new Error("User not found");
 
