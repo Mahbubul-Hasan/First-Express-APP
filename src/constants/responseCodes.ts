@@ -16,7 +16,7 @@ export const HTTP_STATUS_CODES = {
     SERVICE_UNAVAILABLE: 503, // Service Unavailable - Server is temporarily unavailable
 };
 
-export const MESSAGES = {
+export const HTTP_STATUS_MESSAGES = {
     SUCCESS: "Request was successful.",
     CREATED: "Resource created successfully.",
     BAD_REQUEST: "Bad request. Please check your input.",

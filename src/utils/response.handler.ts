@@ -1,4 +1,4 @@
-import { HTTP_STATUS_CODES, MESSAGES } from "../constants/responseCodes.js";
+import { HTTP_STATUS_CODES, HTTP_STATUS_MESSAGES } from "../constants/responseCodes.js";
 import { ResponseData, responseFormat } from "./response.formatter.js";
 import { Response } from "express";
 
@@ -16,11 +16,11 @@ class ResponseHandler {
             if (error instanceof Error) {
                 return res
                     .status(HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR)
-                    .json(responseFormat(false, error.message || MESSAGES.SERVER_ERROR));
+                    .json(responseFormat(false, error.message || HTTP_STATUS_MESSAGES.SERVER_ERROR));
             }
             return res
                 .status(HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR)
-                .json(responseFormat(false, MESSAGES.SERVER_ERROR));
+                .json(responseFormat(false, HTTP_STATUS_MESSAGES.SERVER_ERROR));
         }
     }
 
@@ -33,7 +33,7 @@ class ResponseHandler {
                 res.status(HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR).json(
                     responseFormat(
                         false,
-                        error.message || MESSAGES.SERVER_ERROR,
+                        error.message || HTTP_STATUS_MESSAGES.SERVER_ERROR,
                         {},
                         HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR
                     )
