@@ -19,7 +19,7 @@ class AuthService {
         };
         const user = await User.create(newUser);
 
-        const token = await jwt.sign({ user }, process.env.APP_KEY);
+        const token = await jwt.sign({ user }, process.env.JWT_SECRET);
 
         const data = { user, token };
 
@@ -34,7 +34,7 @@ class AuthService {
         const isValidPass = await bcrypt.compare(password, user.password);
         if (!isValidPass) throw new Error("Invalid credentials");
 
-        const token = await jwt.sign({ user }, process.env.APP_KEY);
+        const token = await jwt.sign({ user }, process.env.JWT_SECRET);
 
         const data = { user, token };
 

@@ -11,7 +11,7 @@ export const authenticate = async (req, res: Response, next) => {
     }
 
     const token = authHeader.replace("Bearer ", "");
-    const isValidToken = await jwt.verify(token, process.env.APP_KEY);
+    const isValidToken = await jwt.verify(token, process.env.JWT_SECRET);
 
     req.auth = isValidToken.user;
 
