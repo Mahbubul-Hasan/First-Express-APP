@@ -1,4 +1,4 @@
-import { HTTP_STATUS_CODES } from "../constants/responseCodes.js";
+import { HTTP_STATUS_CODES } from "../constants/response.codes.js";
 
 export interface ResponseData<T = any> {
     success: boolean;

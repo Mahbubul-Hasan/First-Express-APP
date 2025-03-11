@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { HTTP_STATUS_CODES } from "../constants/responseCodes.js";
+import { HTTP_STATUS_CODES } from "../constants/response.codes.js";
 import path from "path";
 import fs from "fs";
 import { responseFormat } from "../utils/response.formatter.js";

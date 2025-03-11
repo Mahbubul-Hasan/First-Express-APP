@@ -1,17 +1,18 @@
 import bcrypt from "bcrypt";
 import { Request } from "express";
-import { HTTP_STATUS_CODES } from "../constants/responseCodes.js";
+import { HTTP_STATUS_CODES } from "../constants/response.codes.js";
 import { responseFormat } from "../utils/response.formatter.js";
-import { IUser, User } from "../models/user.model.js";
 import { CustomRequest } from "../types/custom.request.js";
 import path from "path";
 import fs from "fs";
 import jwt from "jsonwebtoken";
+import { UserT } from "../types/user.type.js";
+import { User } from "../models/user.model.js";
 
 class AuthService {
     async signup(req: Request) {
         const { name, email, phone, password } = req.body;
-        const newUser: IUser = {
+        const newUser: UserT = {
             name: name,
             email: email,
             phone: phone ?? null,
@@ -28,7 +29,7 @@ class AuthService {
 
     async signin(req: Request) {
         const { email, password } = req.body;
-        const user: IUser = await User.findOne({ email });
+        const user: UserT = await User.findOne({ email });
         if (!user) throw new Error("Invalid credentials");
 
         const isValidPass = await bcrypt.compare(password, user.password);
@@ -45,7 +46,7 @@ class AuthService {
         const file = req.file;
 
         const userId = req.auth._id;
-        const user: IUser = await User.findById(userId);
+        const user: UserT = await User.findById(userId);
         if (!user) throw new Error("User not found");
 
         const previousImagePath = user.image ? path.join(process.cwd(), `/public/uploads/${user.image}`) : null;

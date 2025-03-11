@@ -1,6 +1,6 @@
 import { Response } from "express";
 import jwt from "jsonwebtoken";
-import { HTTP_STATUS_CODES, HTTP_STATUS_MESSAGES } from "../constants/responseCodes.js";
+import { HTTP_STATUS_CODES, HTTP_STATUS_MESSAGES } from "../constants/response.codes.js";
 import { responseFormat } from "../utils/response.formatter.js";
 
 export const authenticate = async (req, res: Response, next) => {

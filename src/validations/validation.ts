@@ -1,4 +1,4 @@
-import { HTTP_STATUS_CODES } from "../constants/responseCodes.js";
+import { HTTP_STATUS_CODES } from "../constants/response.codes.js";
 import { responseFormat } from "../utils/response.formatter.js";
 
 const validate = (schema) => async (req, res, next) => {

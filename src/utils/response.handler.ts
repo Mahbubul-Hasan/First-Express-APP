@@ -1,4 +1,4 @@
-import { HTTP_STATUS_CODES, HTTP_STATUS_MESSAGES } from "../constants/responseCodes.js";
+import { HTTP_STATUS_CODES, HTTP_STATUS_MESSAGES } from "../constants/response.codes.js";
 import { ResponseData, responseFormat } from "./response.formatter.js";
 import { Response } from "express";
 
