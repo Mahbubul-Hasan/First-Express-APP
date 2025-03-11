@@ -3,7 +3,7 @@ import { Category } from "../models/category.model.js";
 import { connectDB, disconnectDB } from "../utils/database.js";
 import { CategoryT } from "../types/category.type.js";
 import { ProductT } from "../types/product.type.js";
-import { capitalize } from "../helper/string.helper.js";
+import { capitalize, toSlug } from "../helper/string.helper.js";
 
 export const productSeeder = async () => {
     try {
@@ -30,6 +30,7 @@ export const productSeeder = async () => {
                     const category: CategoryT = await Category.findOne({ name: capitalize(item.category) });
                     const product: ProductT = {
                         title: item.title,
+                        slug: toSlug(item.title),
                         description: item.description,
                         price: item.price,
                         category: category._id,
