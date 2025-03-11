@@ -1,5 +1,7 @@
+import mongoose from "mongoose";
+
 export interface CategoryT {
-    _id?: string;
+    _id?: mongoose.Schema.Types.ObjectId;
     name: string;
     description?: string;
     createdAt?: Date;
