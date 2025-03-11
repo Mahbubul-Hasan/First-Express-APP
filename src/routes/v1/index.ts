@@ -1,6 +1,7 @@
 import express from "express";
 import publicRoute from "./public.route.js";
 import authRoute from "./auth.route.js";
+import productRouter from "./products.route.js";
 
 const router = express.Router();
 const routesObj = [
@@ -11,6 +12,10 @@ const routesObj = [
     {
         path: "/",
         route: publicRoute,
+    },
+    {
+        path: "/products",
+        route: productRouter,
     },
 ];
 routesObj.forEach((item) => {
