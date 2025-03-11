@@ -43,9 +43,9 @@ class AuthService {
 
     async updateProfilePicture(req: CustomRequest) {
         const file = req.file;
-        const userId = "67cf7bf8a0683fcd38c6426c";
-        const user: IUser = await User.findById(userId);
 
+        const userId = req.auth._id;
+        const user: IUser = await User.findById(userId);
         if (!user) throw new Error("User not found");
 
         const previousImagePath = user.image ? path.join(process.cwd(), `/public/uploads/${user.image}`) : null;
