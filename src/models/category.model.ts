@@ -7,7 +7,7 @@ const categorySchema = new mongoose.Schema<CategoryT>(
             type: String,
             required: [true, "Name is required"],
             minlength: [2, "Title must be at least 2 characters"],
-            maxlength: [10, "Title cannot exceed 10 characters"],
+            maxlength: [50, "Title cannot exceed 50 characters"],
         },
         description: { type: String },
     },

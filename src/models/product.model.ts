@@ -14,7 +14,11 @@ const productSchema = new mongoose.Schema<ProductT>(
             type: Number,
             required: [true, "Price is required"],
         },
-        category: { type: String },
+        category: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "categories",
+            required: [true, "Category is required"],
+        },
         thumbnail: { type: String, required: [true, "Thumbnail is required"] },
     },
     { timestamps: true }
