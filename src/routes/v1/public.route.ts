@@ -5,6 +5,8 @@ import PublicController from "../../controllers/public.controller.js";
 
 const router = express.Router();
 
-router.get("/files/:image", PublicController.viewFiles);
+const publicController = new PublicController();
+
+router.get("/files/:image", publicController.viewFiles);
 
 export default router;
