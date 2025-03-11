@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema<IUser>(
         email: {
             type: String,
             required: [true, "Email is required"],
-            unique: true,
+            unique: [true, "Email is already registered"],
             match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Invalid email address"],
         },
         phone: {
