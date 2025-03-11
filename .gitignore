@@ -1,6 +1,3 @@
-# Created by https://www.toptal.com/developers/gitignore/api/node,visualstudiocode,archives
-# Edit at https://www.toptal.com/developers/gitignore?templates=node,visualstudiocode,archives
-
 ### Archives ###
 # It's better to unpack these files and commit the raw source because
 # git has its own built in compression methods.
@@ -193,4 +190,4 @@ dist
 .history
 .ionide
 
-# End of https://www.toptal.com/developers/gitignore/api/node,visualstudiocode,archives
+public/uploads
