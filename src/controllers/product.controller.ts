@@ -3,9 +3,9 @@ import ProductService from "../services/product.service.js";
 import ResponseHandler from "../utils/response.handler.js";
 
 class ProductController {
-    async getAllProducts(req: Request, res: Response) {
+    async allProducts(req: Request, res: Response) {
         ResponseHandler.handlerAsyncResponse(res, async () => {
-            return await new ProductService().getAllProducts();
+            return await new ProductService().allProducts();
         });
     }
 }
