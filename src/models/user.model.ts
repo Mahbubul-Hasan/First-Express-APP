@@ -1,18 +1,7 @@
-import mongoose, { Document } from "mongoose";
+import mongoose from "mongoose";
+import { UserT } from "../types/user.type.js";
 
-export interface IUser {
-    _id?: string;
-    name: string;
-    email: string;
-    phone?: string;
-    age?: number;
-    image?: string;
-    password: string;
-    createdAt?: Date;
-    updatedAt?: Date;
-}
-
-const userSchema = new mongoose.Schema<IUser>(
+const userSchema = new mongoose.Schema<UserT>(
     {
         name: {
             type: String,
@@ -60,4 +49,4 @@ userSchema.methods.toJSON = function () {
     return user;
 };
 
-export const User = mongoose.model<IUser>("users", userSchema);
+export const User = mongoose.model<UserT>("users", userSchema);
