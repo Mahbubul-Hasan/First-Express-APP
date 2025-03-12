@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
+import mongoose, { Document } from "mongoose";
 
-export interface CartT {
-    _id?: mongoose.Schema.Types.ObjectId;
+export interface CartT extends Document {
+    _id: mongoose.Schema.Types.ObjectId;
     user: mongoose.Schema.Types.ObjectId;
     items: CartItemT[];
     createdAt?: Date;
