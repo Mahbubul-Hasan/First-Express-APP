@@ -40,7 +40,26 @@ class CartService {
 
         const cartDetails = await this.getCart(req);
 
-        return responseFormat(true, "Added in the cart successfully", cartDetails, HTTP_STATUS_CODES.OK);
+        return responseFormat(true, "Added in the cart successfully", cartDetails.data, HTTP_STATUS_CODES.OK);
+    }
+
+    async removeFromCart(req: CustomRequest) {
+        const { product_id } = req.body;
+        const auth: UserT = req.auth;
+
+        let cart: CartT = await Cart.findOne({ user: auth._id });
+        if (!cart) throw new Error(JSON.stringify({ msg: "Cart not found", code: HTTP_STATUS_CODES.NOT_FOUND }));
+
+        if (product_id) {
+            cart.items = cart.items.filter((item: CartItemT) => item.product.toString() != product_id);
+        } else {
+            cart.items = [];
+        }
+        await cart.save();
+
+        const cartDetails = await this.getCart(req);
+
+        return responseFormat(true, "Removed from cart successfully", cartDetails.data, HTTP_STATUS_CODES.OK);
     }
 }
 export default CartService;

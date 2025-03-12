@@ -4,15 +4,21 @@ import AuthService from "../services/auth.service.js";
 import CartService from "../services/cart.service.js";
 
 class CartController {
+    getCart(req: Request, res: Response) {
+        ResponseHandler.handlerAsyncResponse(res, async () => {
+            return await new CartService().getCart(req);
+        });
+    }
+
     addToCart(req: Request, res: Response) {
         ResponseHandler.handlerAsyncResponse(res, async () => {
             return await new CartService().addToCart(req);
         });
     }
 
-    getCart(req: Request, res: Response) {
+    removeFromCart(req: Request, res: Response) {
         ResponseHandler.handlerAsyncResponse(res, async () => {
-            return await new CartService().getCart(req);
+            return await new CartService().removeFromCart(req);
         });
     }
 }

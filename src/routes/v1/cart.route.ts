@@ -13,5 +13,6 @@ const cartController = new CartController();
 
 router.get("/", authenticate, cartController.getCart);
 router.post("/add", authenticate, validate(addToCartSchema), cartController.addToCart);
+router.post("/remove", authenticate, cartController.removeFromCart);
 
 export default router;
