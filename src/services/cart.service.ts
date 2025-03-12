@@ -18,7 +18,7 @@ class CartService {
     }
 
     async addToCart(req: CustomRequest) {
-        const { product_id, quantity } = req.body;
+        const { product_id, quantity, increment } = req.body;
         const auth: UserT = req.auth;
 
         const product: ProductT = await Product.findById(product_id);
@@ -32,7 +32,11 @@ class CartService {
             return item.product.toString() === product_id;
         });
         if (itemIndex > -1) {
-            cart.items[itemIndex].quantity += quantity;
+            if (increment) {
+                cart.items[itemIndex].quantity += quantity;
+            } else {
+                cart.items[itemIndex].quantity -= quantity;
+            }
         } else {
             cart.items.push({ product: product_id, quantity });
         }
