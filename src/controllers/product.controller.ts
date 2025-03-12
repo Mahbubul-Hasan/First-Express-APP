@@ -8,6 +8,13 @@ class ProductController {
             return await new ProductService().allProducts();
         });
     }
+
+    async singleProduct(req: Request, res: Response) {
+        const { slug } = req.params;
+        ResponseHandler.handlerAsyncResponse(res, async () => {
+            return await new ProductService().singleProduct(slug);
+        });
+    }
 }
 
 export default ProductController;

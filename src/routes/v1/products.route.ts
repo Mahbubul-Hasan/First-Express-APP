@@ -6,5 +6,6 @@ const router = express.Router();
 const productController = new ProductController();
 
 router.get("/", productController.allProducts);
+router.get("/:slug", productController.singleProduct);
 
 export default router;
