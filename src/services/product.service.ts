@@ -1,8 +1,8 @@
 import { HTTP_STATUS_CODES } from "../constants/response.codes.js";
 import { responseFormat } from "../utils/response.formatter.js";
 import { Product } from "../models/product.model.js";
-import { Category } from "src/models/category.model.js";
-import { CategoryT } from "src/types/category.type.js";
+import { Category } from "../models/category.model.js";
+import { CategoryT } from "../types/category.type.js";
 
 class ProductService {
     async categoryList() {
