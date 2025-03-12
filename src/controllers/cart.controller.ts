@@ -9,6 +9,12 @@ class CartController {
             return await new CartService().addToCart(req);
         });
     }
+
+    getCart(req: Request, res: Response) {
+        ResponseHandler.handlerAsyncResponse(res, async () => {
+            return await new CartService().getCart(req);
+        });
+    }
 }
 
 export default CartController;

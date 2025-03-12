@@ -8,6 +8,15 @@ import { CartItemT, CartT } from "../types/cart.type.js";
 import { Cart } from "../models/cart.model.js";
 
 class CartService {
+    async getCart(req: CustomRequest) {
+        const auth: UserT = req.auth;
+
+        const cart = await Cart.findOne({ user: auth._id }).populate("items.product");
+        if (!cart) throw new Error(JSON.stringify({ msg: "Cart is empty", code: HTTP_STATUS_CODES.NOT_FOUND }));
+
+        return responseFormat(true, "Your cart details", cart, HTTP_STATUS_CODES.OK);
+    }
+
     async addToCart(req: CustomRequest) {
         const { product_id, quantity } = req.body;
         const auth: UserT = req.auth;
@@ -29,7 +38,9 @@ class CartService {
         }
         await cart.save();
 
-        return responseFormat(true, "Added in the cart successfully", cart, HTTP_STATUS_CODES.OK);
+        const cartDetails = await this.getCart(req);
+
+        return responseFormat(true, "Added in the cart successfully", cartDetails, HTTP_STATUS_CODES.OK);
     }
 }
 export default CartService;
