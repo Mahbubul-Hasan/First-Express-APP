@@ -30,14 +30,20 @@ class ResponseHandler {
                 res.status(result.code).json(result);
             })
             .catch((error) => {
-                res.status(HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR).json(
-                    responseFormat(
-                        false,
-                        error.message || HTTP_STATUS_MESSAGES.SERVER_ERROR,
-                        {},
-                        HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR
-                    )
-                );
+                try {
+                    const { msg, code } = JSON.parse(error.message);
+
+                    res.status(code).json(responseFormat(false, msg || HTTP_STATUS_MESSAGES.SERVER_ERROR, {}, code));
+                } catch (error2) {
+                    res.status(HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR).json(
+                        responseFormat(
+                            false,
+                            error.message || HTTP_STATUS_MESSAGES.SERVER_ERROR,
+                            {},
+                            HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR
+                        )
+                    );
+                }
             });
     }
 }
