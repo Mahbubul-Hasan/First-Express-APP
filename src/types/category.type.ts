@@ -1,10 +1,9 @@
-import mongoose, { Document } from "mongoose";
+import { commonDT } from "./custom.request.js";
 
-export interface CategoryT extends Document {
-    _id: mongoose.Schema.Types.ObjectId;
+export interface CategoryT {
     name: string;
     slug: string;
     description?: string;
-    createdAt?: Date;
-    updatedAt?: Date;
 }
+
+export interface CategoryDT extends CategoryT, commonDT {}
