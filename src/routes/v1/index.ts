@@ -7,7 +7,7 @@ import cartRouter from "./cart.route.js";
 const router = express.Router();
 const routesObj = [
     {
-        path: "/",
+        path: "/auth",
         route: authRoute,
     },
     {
