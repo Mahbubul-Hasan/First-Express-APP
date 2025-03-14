@@ -6,17 +6,21 @@ import { User } from "../models/user.model.js";
 import { RequestX } from "../types/custom.request.js";
 
 export const authenticate = async (req: RequestX, res: Response, next: NextFunction) => {
-    const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    try {
+        const authHeader = req.headers.authorization;
+        if (!authHeader || !authHeader.startsWith("Bearer ")) {
+            throw new Error(HTTP_STATUS_MESSAGES.UNAUTHORIZED);
+        }
+        const token = authHeader.replace("Bearer ", "");
+        const isValidToken = await jwt.verify(token, process.env.JWT_SECRET);
+        const userId = isValidToken.userId;
+
+        const auth = await User.findById(userId);
+        req.auth = auth;
+
+        next();
+    } catch (error) {
         const result = responseFormat(false, HTTP_STATUS_MESSAGES.UNAUTHORIZED, {}, HTTP_STATUS_CODES.UNAUTHORIZED);
         res.status(HTTP_STATUS_CODES.UNAUTHORIZED).json(result);
     }
-    const token = authHeader.replace("Bearer ", "");
-    const isValidToken = await jwt.verify(token, process.env.JWT_SECRET);
-    const userId = isValidToken.userId;
-
-    const auth = await User.findById(userId);
-    req.auth = auth;
-
-    next();
 };
