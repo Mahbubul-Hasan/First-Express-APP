@@ -4,6 +4,7 @@ import { connectDB, disconnectDB } from "../utils/database.js";
 import { CategoryT } from "../types/category.type.js";
 import { ProductT } from "../types/product.type.js";
 import { capitalize, toSlug } from "../helper/string.helper.js";
+import { randomNumber } from "../helper/number.helper.js";
 
 export const productSeeder = async () => {
     try {
@@ -30,7 +31,7 @@ export const productSeeder = async () => {
                     const category: CategoryT = await Category.findOne({ name: capitalize(item.category) });
                     const product: ProductT = {
                         title: item.title,
-                        slug: toSlug(item.title),
+                        slug: toSlug(`${item.title} ${randomNumber(6)}`),
                         description: item.description,
                         price: item.price,
                         category: category._id,
