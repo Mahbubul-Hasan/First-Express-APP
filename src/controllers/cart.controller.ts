@@ -16,6 +16,12 @@ class CartController {
         });
     }
 
+    updateCart(req: Request, res: Response) {
+        ResponseHandler.handlerAsyncResponse(res, async () => {
+            return await new CartService().updateCart(req);
+        });
+    }
+
     removeFromCart(req: Request, res: Response) {
         ResponseHandler.handlerAsyncResponse(res, async () => {
             return await new CartService().removeFromCart(req);

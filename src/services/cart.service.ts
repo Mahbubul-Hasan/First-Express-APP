@@ -18,13 +18,13 @@ class CartService {
     }
 
     async addToCart(req: CustomRequest) {
-        const { product_id, quantity, increment } = req.body;
+        const { product_id, quantity } = req.body;
         const auth: UserT = req.auth;
 
         const product: ProductT = await Product.findById(product_id);
         if (!product) throw new Error(JSON.stringify({ msg: "Product not found", code: HTTP_STATUS_CODES.NOT_FOUND }));
 
-        let cart: CartT | null = await Cart.findOne({ user: auth._id });
+        let cart: CartT = await Cart.findOne({ user: auth._id });
         if (!cart) {
             cart = await Cart.create({ user: auth._id, items: [] });
         }
@@ -32,11 +32,7 @@ class CartService {
             return item.product.toString() === product_id;
         });
         if (itemIndex > -1) {
-            if (increment) {
-                cart.items[itemIndex].quantity += quantity;
-            } else {
-                cart.items[itemIndex].quantity -= quantity;
-            }
+            cart.items[itemIndex].quantity += quantity;
         } else {
             cart.items.push({ product: product_id, quantity });
         }
@@ -45,6 +41,30 @@ class CartService {
         const cartDetails = await this.getCart(req);
 
         return responseFormat(true, "Added in the cart successfully", cartDetails.data, HTTP_STATUS_CODES.OK);
+    }
+
+    async updateCart(req: CustomRequest) {
+        const { product_id, quantity } = req.body;
+        const auth: UserT = req.auth;
+
+        const product: ProductT = await Product.findById(product_id);
+        if (!product) throw new Error(JSON.stringify({ msg: "Product not found", code: HTTP_STATUS_CODES.NOT_FOUND }));
+
+        let cart: CartT = await Cart.findOne({ user: auth._id });
+        if (!cart) {
+            cart = await Cart.create({ user: auth._id, items: [] });
+        }
+        const itemIndex = cart.items.findIndex((item) => {
+            return item.product.toString() === product_id;
+        });
+
+        if (itemIndex > -1) {
+            cart.items[itemIndex].quantity = quantity;
+            await cart.save();
+        }
+        const cartDetails = await this.getCart(req);
+
+        return responseFormat(true, "Cart updated successfully", cartDetails.data, HTTP_STATUS_CODES.OK);
     }
 
     async removeFromCart(req: CustomRequest) {
