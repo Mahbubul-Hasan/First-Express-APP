@@ -1,3 +1,4 @@
+import logger from "src/config/logger.js";
 import { HTTP_STATUS_CODES, HTTP_STATUS_MESSAGES } from "../constants/response.codes.js";
 import { ResponseData, responseFormat } from "./response.formatter.js";
 import { Response } from "express";
@@ -14,6 +15,10 @@ class ResponseHandler {
         } catch (error: unknown) {
             // Safely check if the error is an instance of Error
             if (error instanceof Error) {
+                logger.error({
+                    message: error.message,
+                    stack: error.stack,
+                });
                 return res
                     .status(HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR)
                     .json(responseFormat(false, error.message || HTTP_STATUS_MESSAGES.SERVER_ERROR));
@@ -30,6 +35,10 @@ class ResponseHandler {
                 res.status(result.code).json(result);
             })
             .catch((error) => {
+                logger.error({
+                    message: error.message,
+                    stack: error.stack,
+                });
                 try {
                     const { msg, code } = JSON.parse(error.message);
 
