@@ -1,6 +1,6 @@
 import { Product } from "../models/product.model.js";
 import { Category } from "../models/category.model.js";
-import { connectDB, disconnectDB } from "../utils/database.js";
+import { connectDB, disconnectDB } from "../config/database.js";
 import { CategoryT } from "../types/category.type.js";
 import { ProductT } from "../types/product.type.js";
 import { capitalize, toSlug } from "../helper/string.helper.js";

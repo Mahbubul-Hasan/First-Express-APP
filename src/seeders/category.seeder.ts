@@ -1,4 +1,4 @@
-import { connectDB, disconnectDB } from "../utils/database.js";
+import { connectDB, disconnectDB } from "../config/database.js";
 import { Category } from "../models/category.model.js";
 import { capitalize, toSlug } from "../helper/string.helper.js";
 import { CategoryT } from "../types/category.type.js";
